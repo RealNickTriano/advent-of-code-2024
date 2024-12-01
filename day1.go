@@ -1,78 +1,48 @@
 package main
 
 import (
+	"fmt"
 	"math"
 	"slices"
-	"strconv"
 	"strings"
 )
 
-func mapFunc(val string) []string {
-	return strings.Split(val, " ")
-}
+func solveDay1(data []string) (int, int) {
+	// Part One
+	var answer1 float64 = 0
 
-func filterFunc(val []string) []string {
-	s := make([]string, 2)
-	s[0] = val[0]
-	for _, v := range val[1:] {
-		if v != " " {
-			s[1] = v
-		}
-
-	}
-	return s
-}
-
-func solveDay1(data []string) int {
-	PrintSlice(data)
-	answer := 0
-
-	s := make([][]string, len(data))
+	lefts := make([]int, len(data))
+	rights := make([]int, len(data))
+	fmt.Println(len(data), len(lefts))
 	for i, v := range data {
-		s[i] = mapFunc(v)
-	}
-
-	for i, v := range s {
-		s[i] = filterFunc(v)
-	}
-	lefts := make([]int, 0)
-	rights := make([]int, 0)
-	for _, v := range s {
-		l, _ := strconv.Atoi(v[0])
-		r, _ := strconv.Atoi(v[1])
-		lefts = append(lefts, l)
-		rights = append(rights, r)
+		pair := strings.Split(v, "   ")
+		left := stringToInt(pair[0])
+		right := stringToInt(pair[1])
+		lefts[i] = left
+		rights[i] = right
 	}
 
 	slices.Sort(lefts)
-	slices.Sort(rights)
 	slices.Reverse(lefts)
+	slices.Sort(rights)
 	slices.Reverse(rights)
 
-	final := make([][]int, 0)
 	for i, _ := range lefts {
-		final = append(final, []int{lefts[i], rights[i]})
-	}
-	PrintSlice(final)
-	for _, v := range final {
-		left := v[0]
-		right := v[1]
-		diff := math.Abs(float64(left) - float64(right))
-		answer += int(diff)
+		answer1 += math.Abs(float64(lefts[i]) - float64(rights[i]))
 	}
 
-	answer = 0
-
-	for _, v := range lefts {
+	// Part Two
+	var answer2 int = 0
+	for _, l := range lefts {
 		count := 0
-		for _, val := range rights {
-			if val == v {
+		for _, r := range rights {
+			if r == l {
 				count++
 			}
 		}
-		answer += count * v
+		answer2 += count * l
 	}
 
-	// PrintSlice(s)
-	return answer
+	return int(answer1), answer2
+
 }

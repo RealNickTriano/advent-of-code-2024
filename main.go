@@ -17,7 +17,7 @@ func checkArgs(args []string) {
 }
 
 func main() {
-	solvers := []func([]string) int{
+	solvers := []func([]string) (int, int){
 		solveDay1,
 	}
 
@@ -33,6 +33,6 @@ func main() {
 	inputFile := fmt.Sprintf("day%v.txt", 1)
 	result := readFileByDelimiter(inputFile, "\n")
 
-	answer := solvers[day-1](result)
-	fmt.Printf("\n\nAnswer: %v\n", answer)
+	answer1, answer2 := solvers[day-1](result)
+	fmt.Printf("\n\nAnswer 1: %v\nAnswer 2: %v\n", answer1, answer2)
 }
