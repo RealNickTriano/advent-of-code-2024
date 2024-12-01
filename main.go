@@ -33,5 +33,6 @@ func main() {
 	inputFile := fmt.Sprintf("day%v.txt", 1)
 	result := readFileByDelimiter(inputFile, "\n")
 
-	solvers[day-1](result)
+	answer := solvers[day-1](result)
+	fmt.Printf("\n\nAnswer: %v\n", answer)
 }
