@@ -20,6 +20,7 @@ func main() {
 	solvers := []func([]string) (int, int){
 		solveDay1,
 		solveDay2,
+		solveDay3,
 	}
 
 	args := os.Args[1:]
