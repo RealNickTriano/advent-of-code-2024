@@ -21,6 +21,7 @@ func main() {
 		solveDay1,
 		solveDay2,
 		solveDay3,
+		solveDay4,
 	}
 
 	args := os.Args[1:]
