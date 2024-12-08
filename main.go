@@ -23,6 +23,10 @@ func main() {
 		solveDay3,
 		solveDay4,
 		solveDay5,
+		solveDay6,
+		// solveDay7,
+		// solveDay8,
+		// solveDay9,
 	}
 
 	args := os.Args[1:]
